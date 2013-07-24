@@ -1,0 +1,22 @@
+Mike Bielagus
+CSCI E-251 PS2
+
+Purpose -- The purpose of this project is to implement a malloc/free-like system for managing memory. The system should
+work as described in the assignment specification.
+
+Algorithm -- I decided to use the first-fit algorithm for this project, mainly on the basis of the information in
+Tanenbaum, pp. 186-7. Tanenbaum suggests that first fit does slightly better than both next and best fit, and is
+fairly simple to implement, so it seemed like the best choice. One choice I made for simplicity's sake that I
+would probably change if I wanted a performance boost would be that instead of maintaining only a single list
+for all blocks, whether allocated or free, I would maintain a second list containing only free blocks, so as 
+not to waste time scanning blocks that were known to be allocated when looking for free space. You can see, if you recompile
+with the debug flag off and run the commented-out code at the bottom of mymalloctest, that allocating a larger number of integers
+takes a long time, while freeing them takes very little. I believe that maintaining a free list would improve the allocation speed.
+However, in order to print the memory map, it was easier just to use a single list. By investigating the behavior of myMalloc and
+myFree with the memoryMap function, it appears that blocks are being allocated in an appropriate way, and that
+free space is being merged as it should. Since I did not implement best fit or another system, I was unfortunately 
+not able to make comparisons between my algorithm and alternative methods. However, there were no obvious speed 
+issues.
+
+Interface -- The interface is described in the comments in the header file. mymalloctest is a test file that is intended
+to test the behavior of myMalloc and myFree.
